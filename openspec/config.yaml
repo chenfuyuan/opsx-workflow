@@ -1,0 +1,47 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+context: |
+  所有 OpenSpec 产物必须使用中文编写，包括 pre_design、proposal、design、specs、tasks 及后续相关文档。
+  保留必要的技术标识、文件路径、命令、代码符号原文，但解释性文字、标题、说明、需求、任务与设计内容必须为中文。
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+rules:
+  proposal:
+    - 所有标题、说明和正文必须使用中文。
+    - 章节遵循 OpenSpec spec-driven schema：Why / What Changes / Capabilities / Impact，不增不减。
+    - `What Changes` 每条一行，3-5 条；只表达变化轮廓（"新增/修改/移除 X"），不展开实现细节。
+    - `Capabilities` 节做形式化声明（capability 名 + 一句话定位），不复述 What Changes 的内容。
+    - Non-goals 不在 proposal 中独立成节——canonical 源是 pre_design §1，下游反映在 design.md 的 Goals/Non-Goals 节。
+    - 详细实现细节属于 pre_design / specs / design，不在 proposal 中重复。
+  design:
+    - 所有标题、说明和正文必须使用中文。
+  tasks:
+    - 所有任务描述必须使用中文。
+    - 每个任务一行：动作 + 对象 + 简短约束；细节引用 spec / design，不复述。
+    - 测试任务不单独成节——TDD 节奏让单元/集成测试随实施任务自然产出；跨切面测试（架构边界、E2E 基础设施）可作为独立任务，但不要为已实施的功能再列一遍单元测试。
+    - 末尾"验证与收尾"区分两块：(a) 整体测试基线运行 / 回归确认；(b) 从 spec 移出的不可测约束自检（如"自检未引入业务 schema"）。
+    - 单个任务遵循"一次会话内可完成"原则（约 30-90 分钟工作量）。
+    - 总长度信号：≤ 100 行（含 `## 小节标题`）。
+  specs:
+    - 需求说明、场景说明与补充文字必须使用中文。
+    - 每个 Scenario 必须可被测试代码验证（构造输入/Mock 依赖后能 assert 行为）；只能靠读代码、看 import、看命名约定判断的"架构违规检测"型 scenario 不入 spec。
+    - 不可测内容按性质分流：change 特定的架构判断进 design.md "设计决策"节；项目级架构规则只标记建议用户抽到项目级文档，不主动归档；评审/自检类进 tasks.md 末尾"验证与收尾"区。
+    - 每个 Requirement 推荐 1-3 个 Scenario，超过 3 暗示 Requirement 颗粒度过大，应考虑拆分。
+    - 每个 Requirement 只表达一项能力主张；多能力应拆为多个 Requirement。
+    - 单个 capability 的 spec.md 长度信号 ≤ 200 行（含 requirements + scenarios）；超出暗示该 capability 边界过大，建议拆分。
