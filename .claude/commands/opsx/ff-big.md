@@ -114,6 +114,20 @@ ff --up-to specs   →   opsx:design   →   ff（续跑生成 tasks）
 - 只剩 tasks 是 ready，机械生成它
 - tasks 同时受 pre_design.md 和 design.md 约束
 
+**tasks 预览确认（硬门）**：tasks.md 生成后，向用户展示概要（任务列表，每条一行），询问：
+
+```
+tasks.md 已生成（N 个任务，预计粒度 30-90 分钟/个）：
+  1. <任务 1>
+  2. <任务 2>
+  ...
+确认按此执行？还是要调整？
+```
+
+- 用户要求**小调整**（措辞、顺序、粒度）→ 直接编辑 tasks.md 后再次确认
+- 调整**涉及设计判断**（新决策、推翻已有决策）→ 回到 `/opsx:design` 处理，不在 tasks 层硬改
+- 用户明确确认后，Phase C 才算完成
+
 完成后汇报：`✓ Phase C: tasks ready.`
 
 ### 5. 输出最终状态
@@ -126,9 +140,11 @@ ff --up-to specs   →   opsx:design   →   ff（续跑生成 tasks）
 ## ff-big 完成
 
 Change: <name>
-所有 artifact 已就绪：proposal / specs / design.md / tasks.md
+所有 artifact 已就绪：proposal / specs / design.md / tasks.md（tasks 已经用户确认）
 
-下一步：/opsx:apply 进入实施阶段
+下一步：
+1. 建议先 commit 全部 artifacts（git 锚点；本命令不自动执行）
+2. `/clear` 后在新会话运行 `/opsx:apply` —— artifacts 即完整交接物，干净上下文的实现质量更高
 ```
 
 ## 失败保护
@@ -146,6 +162,7 @@ Change: <name>
 - change name 已解析
 - pre_design.md 存在
 - proposal / specs / design.md / tasks.md 均已 done
+- tasks.md 已经用户预览确认
 - 已告知用户下一步走 `/opsx:apply`
 - 在此结束，不调 `/opsx:apply`
 

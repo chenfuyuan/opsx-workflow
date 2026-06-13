@@ -9,6 +9,8 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
 
 **Input**: Optionally specify a change name after `/opsx:verify` (e.g., `/opsx:verify add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
+**Execution context (IMPORTANT)**: Run the audit (steps 2-7) inside the `spec-verifier` subagent so it happens in a clean context. Do NOT audit directly in a main conversation that just implemented the change — a session reviewing its own work inherits its own reasoning and misses what a fresh reader would catch. The main conversation's job is: resolve the change name (step 1), dispatch the subagent with it, then relay the report and discuss fixes. If subagents are unavailable in the current environment, fall back to running the audit inline but say so explicitly in the report header.
+
 **Steps**
 
 1. **If no change name provided, prompt for selection**
@@ -49,6 +51,11 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
    **Scope note:** Verify checks whether the implementation matches `specs`, `tasks`, and `design`. It does **not** audit whether TDD or systematic debugging was followed during implementation.
 
 5. **Verify Completeness**
+
+   **Test Baseline (hard item — run first)**:
+   - Determine the project's test command: read `.claude/hooks/test-command` if present; otherwise detect from the repo (package.json scripts, Makefile, pyproject/pytest, etc.); otherwise ask the user
+   - Run it. Any failure → CRITICAL issue "Test baseline failing" with a short failure summary
+   - A red baseline blocks the archive recommendation regardless of other dimensions
 
    **Task Completion**:
    - If tasks.md exists in contextFiles, read it
@@ -93,6 +100,11 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
        - Recommendation: "Update implementation or revise design.md to match reality"
    - If no design.md: Skip design conformance check, note "No design.md to verify against"
 
+   **Guardrail Conformance (if `pre_design.md` exists)**:
+   - §4 "Forbidden to invent": search for evidence that forbidden scope leaked into the implementation → CRITICAL if found, with file references
+   - §4 "Must follow" and §2 invariants that are code-observable: check for violations → WARNING with file references
+   - If no pre_design.md: skip, note "No pre_design.md to verify against"
+
 7. **Generate Verification Report**
 
    **Summary Scorecard**:
@@ -102,6 +114,7 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
    ### Summary
    | Dimension    | Status                |
    |--------------|-----------------------|
+   | Tests        | pass / N failing      |
    | Completeness | X/Y tasks, N reqs     |
    | Conformance  | M/N reqs/scenarios    |
    | Divergences  | None / K issues found |
