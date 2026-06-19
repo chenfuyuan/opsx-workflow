@@ -157,20 +157,6 @@ There's no required ending. Discovery might:
 - **Result in artifact updates**: "Updated design.md with these decisions"
 - **Just provide clarity**: User has what they need, moves on
 - **Continue later**: "We can pick this up anytime"
-- **Hand off to pre-design**: if the user is heading to `/opsx:pre-design`, offer to emit a handoff summary in the conversation so pre-design can skip re-exploration. Use exactly this format (it is the contract pre-design consumes):
-
-  ```markdown
-  ## 交接摘要：<topic>
-  - 需求定位：<一句话>
-  - 实现现状：<现有代码/能力的状态>
-  - 依赖就绪度：<就绪 / 阻塞项>
-  - 范围判断：<适合单个 change？需要拆分？>
-  - 已确认的目标 / 成功标准 / 范围内外：<仅写已达成共识的>
-  - 推荐实现路径：<如已形成>
-  - 未决问题（待 pre-design 澄清）：<列表>
-  ```
-
-  Only include fields that were actually discussed — never fabricate consensus that didn't happen. Omit fields with no content rather than guessing.
 
 When things crystallize, you might offer a summary - but it's optional. Sometimes the thinking IS the value.
 

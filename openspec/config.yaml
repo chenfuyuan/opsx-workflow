@@ -25,8 +25,8 @@ rules:
   proposal:
     - 所有标题、说明和正文必须使用中文。
     - 章节遵循 OpenSpec spec-driven schema：Why / What Changes / Capabilities / Impact，不增不减。
-    - `What Changes` 每条一行，3-5 条；只表达变化轮廓（"新增/修改/移除 X"），不展开实现细节。
-    - `Capabilities` 节做形式化声明（capability 名 + 一句话定位），不复述 What Changes 的内容。
+    - "`What Changes` 每条一行，3-5 条；只表达变化轮廓（\"新增/修改/移除 X\"），不展开实现细节。"
+    - "`Capabilities` 节做形式化声明（capability 名 + 一句话定位），不复述 What Changes 的内容。"
     - Non-goals 不在 proposal 中独立成节——canonical 源是 pre_design §1，下游反映在 design.md 的 Goals/Non-Goals 节。
     - 详细实现细节属于 pre_design / specs / design，不在 proposal 中重复。
   design:

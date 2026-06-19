@@ -46,11 +46,6 @@ Archive a completed change in the experimental workflow.
 
    **If no tasks file exists:** Proceed without task-related warning.
 
-   **Pre-archive recommendations (non-blocking)**:
-   - If `/opsx:verify` has not been run for this change in the current cycle, recommend running it first (fresh-context audit via the spec-verifier subagent)
-   - Run `git status --porcelain`; if there are uncommitted changes, recommend committing before archiving — archive moves files, and a clean tree keeps history readable
-   - These are recommendations: warn, let the user confirm, then proceed if they insist
-
 4. **Assess delta spec sync state**
 
    Check for delta specs at `openspec/changes/<name>/specs/`. If none exist, proceed without sync prompt.

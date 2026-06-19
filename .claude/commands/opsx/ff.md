@@ -101,8 +101,7 @@ After completing the run, summarize:
 
 **Otherwise (full run)**:
 - "All artifacts created! Ready for implementation."
-- **Git anchor**: suggest committing the artifacts now (do NOT auto-commit; just propose a one-line commit message)
-- Prompt: "Run `/opsx:apply` to start implementing with the default TDD workflow. For non-trivial changes, prefer running `/clear` first — the artifacts are the complete handoff, and a fresh context implements better."
+- Prompt: "Run `/opsx:apply` to start implementing with the default TDD workflow."
 
 **Artifact Creation Guidelines**
 
@@ -149,6 +148,8 @@ When `pre_design.md` exists, treat it as the **primary upstream constraint** —
     - (b) 从 spec 移出的不可测约束自检（如"自检未引入业务 schema"、"自检 API key 未泄露到日志"）
   - **单任务粒度**：一次会话内可完成（约 30-90 分钟工作量）
   - **长度信号**：tasks.md ≤ 100 行
+
+**Out-of-date references to remove on read**: the old pre_design had "OpenSpec mapping"、"Allowed to elaborate"、"Contract drafts" 等章节，新版本不再包含。如果遇到旧版 pre_design.md 仍有这些章节，可作为附加约束读取，但不要因为缺失而报错。
 
 **Guardrails**
 - Create ALL artifacts needed for implementation (as defined by schema's `apply.requires`)

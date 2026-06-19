@@ -52,9 +52,9 @@ Implement tasks from an OpenSpec change.
    - **spec-driven**: proposal, specs, design, tasks
    - Other schemas: follow the contextFiles from CLI output
 
-   **Additionally, check for `openspec/changes/<name>/pre_design.md`** (plus any sibling `pre_design.*.md` volumes). It is NOT part of `contextFiles`, but if it exists you MUST read it and treat it as implementation-time hard constraints:
-   - **§2 Constraints / Invariants** — must hold in the code you write
-   - **§4 Guardrails** — "Must follow" items must be honored in implementation; "Forbidden to invent" scope MUST NOT be implemented, even if a task seems to imply it. On conflict between a task and a guardrail: pause, surface the conflict, let the user decide — do not silently pick a side.
+   **Also read `openspec/standards.md` if it exists** — the persistent project-level
+   standards (layering/dependency direction, naming vocabulary, module structure,
+   forbidden patterns). Generated code MUST conform to it. If it does not exist, skip silently.
 
 5. **Show current progress**
 
@@ -79,7 +79,6 @@ Implement tasks from an OpenSpec change.
    - If unexpected failures or unexplained behavior appear, switch to the `systematic-debugging` skill to find the root cause before proposing or making additional fixes
    - After root cause is understood, return to the appropriate path and complete the task
    - Mark task complete in the tasks file: `- [ ]` → `- [x]`
-   - **Git anchor**: after every 1-3 completed tasks, suggest a commit with a one-line message (do NOT auto-commit)
    - Continue to next task
 
    **Pause if:**
@@ -98,7 +97,7 @@ Implement tasks from an OpenSpec change.
    Display:
    - Tasks completed this session
    - Overall progress: "N/M tasks complete"
-   - If all done, suggest in order: (1) final commit; (2) fresh-context diff review via the `code-reviewer` subagent; (3) `/opsx:verify` — it runs in the `spec-verifier` subagent; (4) archive once verification passes
+   - If all done: suggest archive
    - If paused: explain why and wait for guidance
 
 **Output During Implementation**
@@ -129,7 +128,7 @@ Working on task 4/7: <task description>
 - [x] Task 2
 ...
 
-All tasks complete! Next: commit your work, then run `/opsx:verify` (fresh-context audit via the spec-verifier subagent). Archive with `/opsx:archive` once verification passes.
+All tasks complete! You can archive this change with `/opsx:archive`.
 ```
 
 **Output On Pause (Issue Encountered)**
@@ -155,8 +154,7 @@ What would you like to do?
 **Guardrails**
 - Keep going through tasks until done or blocked
 - Always read context files before starting (from the apply instructions output)
-- If `pre_design.md` exists, treat its §2 / §4 as implementation-time hard constraints — never implement "Forbidden to invent" scope; pause and flag conflicts instead
-- If this session just finished a long planning conversation, recommend `/clear` before implementing — the artifacts are the complete handoff
+- **Generated code MUST conform to `openspec/standards.md` if it exists** — respect layering/dependency direction, naming vocabulary, module boundaries, and forbidden patterns. If a task cannot be done without violating standards, pause and surface the conflict instead of silently breaking the boundary.
 - Use the `test-driven-development` skill for code implementation tasks; do not force TDD for documentation-only tasks
 - If unexpected failures or unexplained behavior appear, use the `systematic-debugging` skill before proposing additional fixes
 - If task is ambiguous, pause and ask before implementing

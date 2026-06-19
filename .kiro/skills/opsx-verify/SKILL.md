@@ -91,6 +91,14 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
        - Recommendation: "Update implementation or revise design.md to match reality"
    - If no design.md: Skip design conformance check, note "No design.md to verify against"
 
+   **Standards Conformance** (if `openspec/standards.md` exists):
+   - Read the persistent project-level standards (layering/dependency direction, naming vocabulary, module structure, forbidden patterns)
+   - Check the change's code against each filled-in section (skip empty template sections)
+   - If a violation is found (wrong dependency direction, inconsistent naming, breached module boundary, forbidden pattern):
+     - Add WARNING: "Standards violation: <which rule> at <file>:<lines>"
+     - Recommendation: "Align with standards.md §<section>, or update standards.md if the rule changed"
+   - If `standards.md` does not exist: skip this check, note "No standards.md to verify against"
+
 7. **Generate Verification Report**
 
    **Summary Scorecard**:
@@ -130,7 +138,7 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
 
 - **Completeness**: Focus on objective checklist items (checkboxes, requirements list)
 - **Conformance**: Use code, tests, and artifact references as evidence that documented behavior is implemented
-- **Divergences**: Report mismatches between implementation and artifacts, not general style or process concerns
+- **Divergences**: Report mismatches between implementation and artifacts, not general style or process concerns. **Exception**: violations of an existing `openspec/standards.md` (layering, dependency direction, naming, forbidden patterns) ARE in scope — report them as WARNING.
 - **False Positives**: When uncertain, prefer SUGGESTION over WARNING, WARNING over CRITICAL
 - **Actionability**: Every issue must have a specific recommendation with file/line references where applicable
 - **Out of scope**: Do not audit whether TDD or systematic debugging was followed during implementation

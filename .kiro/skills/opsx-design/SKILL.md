@@ -279,7 +279,7 @@ OK 落盘？还是要调整哪一块？
 - **长度信号不是硬上限** — 超出请自检"是不是塞了不该塞的"；确实必要的内容应坦诚保留
 - **接收从 spec 移出的架构判断** — 当 ff/spec 生成识别到不可测的架构 scenario 时，按性质分流到 design.md：
   - **change 特定**的架构判断（如"AI 网关 facade 必须中性"、"profile 命名禁含业务语义"）→ 进 `Decisions` 节
-  - **项目级**架构规则（如"capability 不依赖 business"——所有 capability 都该如此）→ AI 在对话中提示用户："这是项目级规则，建议抽到项目级文档；本工作流不主动创建该文件"，**不写入 design.md**
+  - **项目级**架构规则（如"capability 不依赖 business"——所有 capability 都该如此）→ **路由进 `openspec/standards.md`**：AI 在对话中提示用户"这是项目级规则，建议回填到 standards.md 的对应小节（分层依赖 / 命名词汇表 / 模块结构 / 禁止模式）"，用户确认后增量写入 standards.md 对应小节，**不写入 design.md**。standards.md 不存在时提示用户从模板初始化。
 
 ## 失败保护
 

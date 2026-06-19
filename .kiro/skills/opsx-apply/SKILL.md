@@ -50,6 +50,10 @@ Implement tasks from an OpenSpec change.
    - **spec-driven**: proposal, specs, design, tasks
    - Other schemas: follow the contextFiles from CLI output
 
+   **Also read `openspec/standards.md` if it exists** — the persistent project-level
+   standards (layering/dependency direction, naming vocabulary, module structure,
+   forbidden patterns). Generated code MUST conform to it. If it does not exist, skip silently.
+
 5. **Show current progress**
 
    Display:
@@ -148,6 +152,7 @@ What would you like to do?
 **Guardrails**
 - Keep going through tasks until done or blocked
 - Always read context files before starting (from the apply instructions output)
+- **Generated code MUST conform to `openspec/standards.md` if it exists** — respect layering/dependency direction, naming vocabulary, module boundaries, and forbidden patterns. If a task cannot be done without violating standards, pause and surface the conflict instead of silently breaking the boundary.
 - Use the `test-driven-development` skill for code implementation tasks; do not force TDD for documentation-only tasks
 - If unexpected failures or unexplained behavior appear, use the `systematic-debugging` skill before proposing additional fixes
 - If task is ambiguous, pause and ask before implementing
