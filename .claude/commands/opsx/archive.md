@@ -7,6 +7,8 @@ tags: [workflow, archive, experimental]
 
 Archive a completed change in the experimental workflow.
 
+**语言**：所有面向用户的交流（提示、警告、汇总、下方所有 Output 模板）必须使用中文。保留命令、文件路径、change 名、schema 名、归档目录名等技术标识的原文，但解释性文字与标题用中文。
+
 **Input**: Optionally specify a change name after `/opsx:archive` (e.g., `/opsx:archive add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
@@ -113,64 +115,64 @@ Archive a completed change in the experimental workflow.
 **Output On Success**
 
 ```
-## Archive Complete
+## 归档完成
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** ✓ Synced to main specs
-**Status:** ✓ Updated openspec/实现状态.md (<capability-name> → 已实现)
+**Change：** <change-name>
+**Schema：** <schema-name>
+**归档至：** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Specs：** ✓ 已同步到主 specs
+**Status：** ✓ 已更新 openspec/实现状态.md（<capability-name> → 已实现）
 
-All artifacts complete. All tasks complete.
+所有产物已完成。所有任务已完成。
 ```
 
 **Output On Success (No Delta Specs)**
 
 ```
-## Archive Complete
+## 归档完成
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** No delta specs
-**Status:** ✓ Updated openspec/实现状态.md (<capability-name> → 已实现)
+**Change：** <change-name>
+**Schema：** <schema-name>
+**归档至：** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Specs：** 无 delta specs
+**Status：** ✓ 已更新 openspec/实现状态.md（<capability-name> → 已实现）
 
-All artifacts complete. All tasks complete.
+所有产物已完成。所有任务已完成。
 ```
 
 **Output On Success With Warnings**
 
 ```
-## Archive Complete (with warnings)
+## 归档完成（含警告）
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** Sync skipped (user chose to skip)
-**Status:** ✓ Updated openspec/实现状态.md (<capability-name> → 已实现)
+**Change：** <change-name>
+**Schema：** <schema-name>
+**归档至：** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Specs：** 已跳过同步（用户选择跳过）
+**Status：** ✓ 已更新 openspec/实现状态.md（<capability-name> → 已实现）
 
-**Warnings:**
-- Archived with 2 incomplete artifacts
-- Archived with 3 incomplete tasks
-- Delta spec sync was skipped (user chose to skip)
+**警告：**
+- 归档时有 2 个未完成的产物
+- 归档时有 3 个未完成的任务
+- delta spec 同步已被跳过（用户选择跳过）
 
-Review the archive if this was not intentional.
+若非有意为之，请检查此归档。
 ```
 
 **Output On Error (Archive Exists)**
 
 ```
-## Archive Failed
+## 归档失败
 
-**Change:** <change-name>
-**Target:** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Change：** <change-name>
+**目标：** openspec/changes/archive/YYYY-MM-DD-<name>/
 
-Target archive directory already exists.
+目标归档目录已存在。
 
-**Options:**
-1. Rename the existing archive
-2. Delete the existing archive if it's a duplicate
-3. Wait until a different date to archive
+**可选方案：**
+1. 重命名已有的归档
+2. 若为重复归档，删除已有的归档
+3. 等到其他日期再归档
 ```
 
 **Guardrails**

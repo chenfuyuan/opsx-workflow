@@ -7,6 +7,8 @@ tags: [workflow, verify, experimental]
 
 Verify that an implementation matches the change artifacts (specs, tasks, design).
 
+**语言**：所有面向用户的交流（验证报告、问题清单、最终结论、下方所有 Output 模板）必须使用中文。保留命令、文件路径、change 名、schema 名、代码引用（如 `file.ts:123`）等技术标识的原文，但解释性文字与标题用中文。
+
 **Input**: Optionally specify a change name after `/opsx:verify` (e.g., `/opsx:verify add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
@@ -105,14 +107,14 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
 
    **Summary Scorecard**:
    ```
-   ## Verification Report: <change-name>
+   ## 验证报告：<change-name>
 
-   ### Summary
-   | Dimension    | Status                |
-   |--------------|-----------------------|
-   | Completeness | X/Y tasks, N reqs     |
-   | Conformance  | M/N reqs/scenarios    |
-   | Divergences  | None / K issues found |
+   ### 汇总
+   | 维度       | 状态                  |
+   |------------|-----------------------|
+   | 完整性     | X/Y 任务，N 项需求    |
+   | 一致性     | M/N 需求/场景         |
+   | 偏差       | 无 / 发现 K 个问题    |
    ```
 
    **Issues by Priority**:
@@ -132,9 +134,9 @@ Verify that an implementation matches the change artifacts (specs, tasks, design
       - Each with specific recommendation
 
    **Final Assessment**:
-   - If CRITICAL issues: "X critical issue(s) found. Fix before archiving."
-   - If only warnings: "No critical issues. Y warning(s) to consider. Ready for archive (with noted improvements)."
-   - If all clear: "All checks passed. Ready for archive."
+   - If CRITICAL issues: "发现 X 个严重问题，请在归档前修复。"
+   - If only warnings: "无严重问题。有 Y 个警告需考虑。可以归档（请留意上述改进项）。"
+   - If all clear: "全部检查通过，可以归档。"
 
 **Verification Heuristics**
 

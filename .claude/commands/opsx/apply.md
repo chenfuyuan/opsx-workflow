@@ -7,6 +7,8 @@ tags: [workflow, artifacts, experimental]
 
 Implement tasks from an OpenSpec change.
 
+**语言**：所有面向用户的交流（进度说明、提示、状态汇报、下方所有 Output 模板）必须使用中文。保留命令、文件路径、change 名、schema 名、代码符号等技术标识的原文，但解释性文字与标题用中文。
+
 **Input**: Optionally specify a change name (e.g., `/opsx:apply add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
@@ -103,52 +105,52 @@ Implement tasks from an OpenSpec change.
 **Output During Implementation**
 
 ```
-## Implementing: <change-name> (schema: <schema-name>)
+## 正在实现：<change-name>（schema：<schema-name>）
 
-Working on task 3/7: <task description>
-[...implementation happening...]
-✓ Task complete
+正在处理任务 3/7：<任务描述>
+[...实现过程...]
+✓ 任务完成
 
-Working on task 4/7: <task description>
-[...implementation happening...]
-✓ Task complete
+正在处理任务 4/7：<任务描述>
+[...实现过程...]
+✓ 任务完成
 ```
 
 **Output On Completion**
 
 ```
-## Implementation Complete
+## 实现完成
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Progress:** 7/7 tasks complete ✓
+**Change：** <change-name>
+**Schema：** <schema-name>
+**进度：** 7/7 任务完成 ✓
 
-### Completed This Session
-- [x] Task 1
-- [x] Task 2
+### 本次会话完成
+- [x] 任务 1
+- [x] 任务 2
 ...
 
-All tasks complete! You can archive this change with `/opsx:archive`.
+所有任务已完成！可以用 `/opsx:archive` 归档此 change。
 ```
 
 **Output On Pause (Issue Encountered)**
 
 ```
-## Implementation Paused
+## 实现已暂停
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Progress:** 4/7 tasks complete
+**Change：** <change-name>
+**Schema：** <schema-name>
+**进度：** 4/7 任务完成
 
-### Issue Encountered
-<description of the issue>
+### 遇到的问题
+<问题描述>
 
-**Options:**
-1. <option 1>
-2. <option 2>
-3. Other approach
+**可选方案：**
+1. <方案一>
+2. <方案二>
+3. 其他方案
 
-What would you like to do?
+你希望如何处理？
 ```
 
 **Guardrails**
