@@ -5,6 +5,12 @@ description: Archive a completed change in the experimental workflow
 
 Archive a completed change in the experimental workflow.
 
+**Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
+
+**Path resolution:** The `openspec/changes/…` and `openspec/specs/…` paths below are the repo-local default. When the change lives in a store, resolve real locations from `openspec status --change "<name>" --json` — `changeRoot` (the change dir to move) and `planningHome.changesDir` (whose `archive/` subdir is the archive target); main specs live under the same planning home. Operate on those resolved paths, not the hardcoded repo-local ones. (`openspec archive <name> [--store <id>]` is the CLI alternative if you don't need the custom date-stamped naming.)
+
+**语言**：所有面向用户的交流（提示、警告、汇总、下方所有 Output 模板）必须使用中文。保留命令、文件路径、change 名、schema 名、归档目录名等技术标识的原文，但解释性文字与标题用中文。
+
 **Input**: Optionally specify a change name after `/opsx-archive` (e.g., `/opsx-archive add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
@@ -88,61 +94,61 @@ Archive a completed change in the experimental workflow.
 **Output On Success**
 
 ```
-## Archive Complete
+## 归档完成
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** ✓ Synced to main specs
+**Change：** <change-name>
+**Schema：** <schema-name>
+**归档至：** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Specs：** ✓ 已同步到主 specs
 
-All artifacts complete. All tasks complete.
+所有产物已完成。所有任务已完成。
 ```
 
 **Output On Success (No Delta Specs)**
 
 ```
-## Archive Complete
+## 归档完成
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** No delta specs
+**Change：** <change-name>
+**Schema：** <schema-name>
+**归档至：** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Specs：** 无 delta specs
 
-All artifacts complete. All tasks complete.
+所有产物已完成。所有任务已完成。
 ```
 
 **Output On Success With Warnings**
 
 ```
-## Archive Complete (with warnings)
+## 归档完成（含警告）
 
-**Change:** <change-name>
-**Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** Sync skipped (user chose to skip)
+**Change：** <change-name>
+**Schema：** <schema-name>
+**归档至：** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Specs：** 已跳过同步（用户选择跳过）
 
-**Warnings:**
-- Archived with 2 incomplete artifacts
-- Archived with 3 incomplete tasks
-- Delta spec sync was skipped (user chose to skip)
+**警告：**
+- 归档时有 2 个未完成的产物
+- 归档时有 3 个未完成的任务
+- delta spec 同步已被跳过（用户选择跳过）
 
-Review the archive if this was not intentional.
+若非有意为之，请检查此归档。
 ```
 
 **Output On Error (Archive Exists)**
 
 ```
-## Archive Failed
+## 归档失败
 
-**Change:** <change-name>
-**Target:** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Change：** <change-name>
+**目标：** openspec/changes/archive/YYYY-MM-DD-<name>/
 
-Target archive directory already exists.
+目标归档目录已存在。
 
-**Options:**
-1. Rename the existing archive
-2. Delete the existing archive if it's a duplicate
-3. Wait until a different date to archive
+**可选方案：**
+1. 重命名已有的归档
+2. 若为重复归档，删除已有的归档
+3. 等到其他日期再归档
 ```
 
 **Guardrails**

@@ -1,6 +1,6 @@
 ---
 name: opsx-explore
-description: Enter explore mode - think through ideas, investigate problems, clarify requirements
+description: "Enter explore mode - think through ideas, investigate problems, clarify requirements"
 ---
 
 Enter explore mode. Think deeply. Visualize freely. Follow the conversation wherever it goes.
@@ -9,6 +9,8 @@ Enter explore mode. Think deeply. Visualize freely. Follow the conversation wher
 
 **This is a stance, not a workflow.** There are no fixed steps, no required sequence, no mandatory outputs. You're a thinking partner helping the user explore.
 
+**Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
+
 **Input**: The argument after `/opsx-explore` is whatever the user wants to think about. Could be:
 - A vague idea: "real-time collaboration"
 - A specific problem: "the auth system is getting unwieldy"
@@ -16,7 +18,6 @@ Enter explore mode. Think deeply. Visualize freely. Follow the conversation wher
 - A comparison: "postgres vs sqlite for this"
 - Nothing (just enter explore mode)
 
----
 
 ## The Stance
 
@@ -27,7 +28,6 @@ Enter explore mode. Think deeply. Visualize freely. Follow the conversation wher
 - **Patient** - Don't rush to conclusions, let the shape of the problem emerge
 - **Grounded** - Explore the actual codebase when relevant, don't just theorize
 
----
 
 ## What You Might Do
 
@@ -74,7 +74,6 @@ Depending on what the user brings, you might:
 - Find gaps in understanding
 - Suggest spikes or investigations
 
----
 
 ## OpenSpec Awareness
 
@@ -107,10 +106,8 @@ Think freely. When insights crystallize, you might offer:
 If the user mentions a change or you detect one is relevant:
 
 1. **Read existing artifacts for context**
-   - `openspec/changes/<name>/proposal.md`
-   - `openspec/changes/<name>/design.md`
-   - `openspec/changes/<name>/tasks.md`
-   - etc.
+   - Run `openspec status --change "<name>" --json` and use `changeRoot` / `artifactPaths` to locate files (repo-local default is `openspec/changes/<name>/`).
+   - Read the artifacts (`proposal.md`, `design.md`, `tasks.md`, delta specs under `specs/`, etc.) from the resolved paths.
 
 2. **Reference them naturally in conversation**
    - "Your design mentions using Redis, but we just realized SQLite fits better..."
@@ -134,7 +131,6 @@ If the user mentions a change or you detect one is relevant:
 
 4. **The user decides** - Offer and move on. Don't pressure. Don't auto-capture.
 
----
 
 ## What You Don't Have To Do
 
@@ -145,7 +141,6 @@ If the user mentions a change or you detect one is relevant:
 - Stay on topic if a tangent is valuable
 - Be brief (this is thinking time)
 
----
 
 ## Ending Discovery
 
@@ -158,7 +153,6 @@ There's no required ending. Discovery might:
 
 When things crystallize, you might offer a summary - but it's optional. Sometimes the thinking IS the value.
 
----
 
 ## Guardrails
 

@@ -5,6 +5,8 @@ description: Create a change and generate all artifacts needed for implementatio
 
 Fast-forward through artifact creation - generate everything needed to start implementation.
 
+**Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
+
 **Input**:
 
 - `<change-name>` (positional) — change name in kebab-case, OR a description of what to build. If omitted, ask via `AskUserQuestion`.
@@ -23,16 +25,16 @@ Fast-forward through artifact creation - generate everything needed to start imp
 
 2. **Create or reuse the change directory**
 
-   Check if `openspec/changes/<name>/` already exists (e.g., created by `/opsx-pre-design`).
-   - If it exists, reuse it — do NOT run `openspec new change` again
-   - If it doesn't exist, create it:
+   Check whether the change already exists (e.g., created by `/opsx-pre-design`) by running `openspec status --change "<name>" --json` (add `--store <id>` if a store is in play).
+   - If it resolves, reuse it and note its `changeRoot` from the status JSON — do NOT run `openspec new change` again
+   - If it does not exist yet, create it:
      ```bash
      openspec new change "<name>"
      ```
 
 3. **Check for pre_design**
 
-   Check if `openspec/changes/<name>/pre_design.md` exists. If it does:
+   Check whether `pre_design.md` exists under the change's `changeRoot` (from the status JSON), i.e. `<changeRoot>/pre_design.md`. If it does:
    - Read it (and any sibling `pre_design.*.md` volume files)
    - This is the **binding upstream input** for all subsequent artifact generation
    - Announce to user: "Found pre_design.md — all artifacts will be generated under its constraints."
@@ -63,11 +65,11 @@ Fast-forward through artifact creation - generate everything needed to start imp
         - `rules`: Artifact-specific rules (constraints for you - do NOT include in output)
         - `template`: The structure to use for your output file
         - `instruction`: Schema-specific guidance for this artifact type
-        - `outputPath`: Where to write the artifact
+        - `resolvedOutputPath`: **absolute, store-aware path to write the artifact — use this** (`outputPath` is only the bare filename like `proposal.md` and would land in the repo root)
         - `dependencies`: Completed artifacts to read for context
       - Read any completed dependency files for context
       - **If pre_design exists**: apply `pre_design` constraints (see section below)
-      - Create the artifact file using `template` as the structure
+      - Create the artifact file using `template` as the structure, writing it to `resolvedOutputPath`
       - Apply `context` and `rules` as constraints - but do NOT copy them into the file
       - Show brief progress: "✓ Created <artifact-id>"
 

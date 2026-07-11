@@ -131,10 +131,7 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
       mv openspec/changes/<name> openspec/changes/archive/YYYY-MM-DD-<name>
       ```
 
-   c. **Update implementation status**:
-      Read `openspec/实现状态.md`. For the archived change, determine what capability it implements (from proposal/design). If a matching row exists, update status → "已实现" with the change name and date. If it's a new capability, append a row to the appropriate section. If no capability can be determined, skip. Update the "最后更新" timestamp once after all changes are processed.
-
-   d. **Track outcome** for each change:
+   c. **Track outcome** for each change:
       - Success: archived successfully
       - Failed: error during archive (record error)
       - Skipped: user chose not to archive (if applicable)
@@ -157,11 +154,6 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
    Spec sync summary:
    - 4 delta specs synced to main specs
    - 1 conflict resolved (auth: applied both in chronological order)
-
-   Status updates:
-   - <capability-1> → 已实现
-   - <capability-2> → 已实现
-   - 2 changes had no matching capability
    ```
 
    If any failures:

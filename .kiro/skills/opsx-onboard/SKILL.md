@@ -5,7 +5,6 @@ description: Guided onboarding - walk through a complete OpenSpec workflow cycle
 
 Guide the user through their first complete OpenSpec workflow cycle. This is a teaching experience—you'll do real work in their codebase while explaining each step.
 
----
 
 ## Preflight
 
@@ -20,7 +19,8 @@ openspec status --json 2>&1 || echo "NOT_INITIALIZED"
 
 Stop here if not initialized.
 
----
+**Store note:** This walkthrough uses the project's local `openspec/` root. The `openspec/changes/<name>/…` paths shown throughout are the repo-local default; if you're onboarding into a store (a standalone OpenSpec repo registered on this machine), run `openspec store list --json` and pass `--store <id>` on the `openspec` commands, and resolve real paths from `changeRoot` in `openspec status --json` rather than assuming the repo-local layout.
+
 
 ## Phase 1: Welcome
 
@@ -44,7 +44,6 @@ I'll walk you through a complete change cycle—from idea to implementation—us
 Let's start by finding something to work on.
 ```
 
----
 
 ## Phase 2: Task Selection
 
@@ -116,7 +115,6 @@ What would you prefer?
 
 Let the user override if they insist—this is a soft guardrail.
 
----
 
 ## Phase 3: Explore Demo
 
@@ -147,7 +145,6 @@ Now let's create a change to hold our work.
 
 **PAUSE** - Wait for user acknowledgment before proceeding.
 
----
 
 ## Phase 4: Create the Change
 
@@ -181,7 +178,6 @@ openspec/changes/<name>/
 Now let's fill in the first artifact—the proposal.
 ```
 
----
 
 ## Phase 5: Proposal
 
@@ -199,7 +195,6 @@ I'll draft one based on our task.
 ```
 Here's a draft proposal:
 
----
 
 ## Why
 
@@ -222,7 +217,6 @@ Here's a draft proposal:
 - `src/path/to/file.ts`: [what changes]
 - [other files if applicable]
 
----
 
 Does this capture the intent? I can adjust before we save it.
 ```
@@ -241,7 +235,6 @@ Proposal saved. This is your "why" document—you can always come back and refin
 Next up: specs.
 ```
 
----
 
 ## Phase 6: Specs
 
@@ -264,7 +257,6 @@ Draft the spec content:
 ```
 Here's the spec:
 
----
 
 ## ADDED Requirements
 
@@ -278,14 +270,12 @@ Here's the spec:
 - **THEN** <expected outcome>
 - **AND** <additional outcome if needed>
 
----
 
 This format—WHEN/THEN/AND—makes requirements testable. You can literally read them as test cases.
 ```
 
 Save to `openspec/changes/<name>/specs/<capability>/spec.md`.
 
----
 
 ## Phase 7: Design
 
@@ -303,7 +293,6 @@ For small changes, this might be brief. That's fine—not every change needs dee
 ```
 Here's the design:
 
----
 
 ## Context
 
@@ -323,14 +312,12 @@ Here's the design:
 
 [Explanation of approach and rationale]
 
----
 
 For a small task, this captures the key decisions without over-engineering.
 ```
 
 Save to `openspec/changes/<name>/design.md`.
 
----
 
 ## Phase 8: Tasks
 
@@ -348,7 +335,6 @@ These should be small, clear, and in logical order. For this workflow, tasks sho
 ```
 Here are the implementation tasks:
 
----
 
 ## 1. [Category or file]
 
@@ -363,7 +349,6 @@ Here are the implementation tasks:
 
 - [ ] 2.1 Run focused regression checks for the implemented behavior
 
----
 
 Each checkbox becomes a unit of work in the apply phase. Ready to implement?
 ```
@@ -372,7 +357,6 @@ Each checkbox becomes a unit of work in the apply phase. Ready to implement?
 
 Save to `openspec/changes/<name>/tasks.md`.
 
----
 
 ## Phase 9: Apply (Implementation)
 
@@ -411,7 +395,6 @@ All tasks done:
 Implementation is complete. Next, verify that the code matches the documented artifacts before archiving.
 ```
 
----
 
 ## Phase 10: Verify
 
@@ -439,7 +422,6 @@ Verification checks artifact completeness and conformance:
 If verification looks good, we can archive the change.
 ```
 
----
 
 ## Phase 11: Archive
 
@@ -464,7 +446,6 @@ Archived to: `openspec/changes/archive/YYYY-MM-DD-<name>/`
 The change is now part of your project's history. The code is in your codebase, the decision record is preserved.
 ```
 
----
 
 ## Phase 12: Recap & Next Steps
 
@@ -485,7 +466,6 @@ You just completed a full OpenSpec cycle:
 
 This same rhythm works for any size change—a small fix or a major feature.
 
----
 
 ## Command Reference
 
@@ -499,14 +479,12 @@ This same rhythm works for any size change—a small fix or a major feature.
 | `/opsx-verify` | Verify implementation matches artifacts |
 | `/opsx-archive` | Archive a completed change |
 
----
 
 ## What's Next?
 
 Try `/opsx-new` or `/opsx-ff` on something you actually want to build. You've got the rhythm now!
 ```
 
----
 
 ## Graceful Exit Handling
 
@@ -549,7 +527,6 @@ Try `/opsx-new` to start your first change, or `/opsx-ff` if you want to move fa
 
 Exit gracefully.
 
----
 
 ## Guardrails
 

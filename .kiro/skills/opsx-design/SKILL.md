@@ -1,6 +1,6 @@
 ---
 name: opsx-design
-description: 在 pre_design 基础上交互式生成 design.md，章节遵循 OpenSpec spec-driven schema
+description: "在 pre_design 基础上交互式生成 design.md，章节遵循 OpenSpec spec-driven schema"
 ---
 
 # Design：交互式架构设计
@@ -32,6 +32,8 @@ description: 在 pre_design 基础上交互式生成 design.md，章节遵循 Op
 3. 多候选或无法推断 → 列出活跃 change 让用户选择
 
 确定 change 后，目录下必须已有 `pre_design.md`、`proposal.md`、`specs/`。
+
+**Store 与路径解析**：若用户指定了 store（store = 注册在本机的独立 OpenSpec 仓库）或工作发生在其中，先 `openspec store list --json` 获取 store id，并在 `openspec list` / `openspec status` 上带 `--store <id>`。下文的 `openspec/changes/<change>/…` 是无 store 时的本地默认；实际读写位置用 `openspec status --change <change> --json` 的 `changeRoot` 解析（如 `<changeRoot>/design.md`、`<changeRoot>/pre_design.md`），不要假设本地路径。未指定 store 时作用于最近的本地 `openspec/` 根。
 
 <HARD-GATE>
 在 `design.md` 写入并经用户确认之前：
@@ -227,7 +229,7 @@ OK 落盘？还是要调整哪一块？
 
 - 用户回复"调整 X"/"不对"/"再想想" → 回到对话定位到对应决策或节，**不写文件**
 - 任何 ✗ 项 → 列出并请用户处理或显式放行
-- 全 ✓ 且用户明确"OK / 落盘吧 / 写吧" → 写 `openspec/changes/<change>/design.md`，结束
+- 全 ✓ 且用户明确"OK / 落盘吧 / 写吧" → 写 design.md 到 `<changeRoot>/design.md`（changeRoot 来自 `openspec status --change <change> --json`；无 store 时即 `openspec/changes/<change>/design.md`），结束
 
 ## design.md 内容结构
 

@@ -7,6 +7,10 @@ Archive multiple completed changes in a single operation.
 
 This skill allows you to batch-archive changes, handling spec conflicts intelligently by checking the codebase to determine what's actually implemented.
 
+**Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
+
+**Path resolution:** The `openspec/changes/…` and `openspec/specs/…` paths below are the repo-local default. When a change lives in a store, resolve real locations from `openspec status --change "<name>" --json` — `changeRoot` (the change dir to move) and `planningHome.changesDir` (whose `archive/` subdir is the archive target). Operate on those resolved paths, not the hardcoded repo-local ones.
+
 **Input**: None required (prompts for selection)
 
 **Steps**
