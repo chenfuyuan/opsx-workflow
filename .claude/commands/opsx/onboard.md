@@ -22,6 +22,8 @@ openspec status --json 2>&1 || echo "NOT_INITIALIZED"
 
 Stop here if not initialized.
 
+**Store note:** This walkthrough uses the project's local `openspec/` root. The `openspec/changes/<name>/…` paths shown throughout are the repo-local default; if you're onboarding into a store (a standalone OpenSpec repo registered on this machine), run `openspec store list --json` and pass `--store <id>` on the `openspec` commands, and resolve real paths from `changeRoot` in `openspec status --json` rather than assuming the repo-local layout.
+
 ---
 
 ## Phase 1: Welcome

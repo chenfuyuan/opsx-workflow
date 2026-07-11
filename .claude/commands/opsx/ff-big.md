@@ -27,6 +27,8 @@ ff --up-to specs   →   opsx:design   →   ff（续跑生成 tasks）
 - 不实施 tasks（apply 阶段的事）
 - 不跳过 opsx:design 的交互（要纯机械跑请用 `/opsx:ff`）
 
+**Store 选择**：若用户指定了 store（store = 注册在本机的独立 OpenSpec 仓库）或工作发生在其中，先 `openspec store list --json` 获取 store id，并在本命令的 `openspec list` / `openspec status` 调用上带 `--store <id>`；被编排的 ff / opsx:design 阶段也在同一 store 下操作。未指定 store 时作用于最近的本地 `openspec/` 根。
+
 **Input**: `/opsx:ff-big <change-name>`，change-name 可选。
 
 省略时按以下顺序推断：
@@ -75,7 +77,7 @@ ff --up-to specs   →   opsx:design   →   ff（续跑生成 tasks）
 
 **自检 pre_design：**
 
-- 检查 `openspec/changes/<name>/pre_design.md` 是否存在
+- 检查 change 的 `pre_design.md` 是否存在——用 `openspec status --change <name> --json` 的 `changeRoot` 解析路径（`<changeRoot>/pre_design.md`），不要假设本地 `openspec/changes/<name>/`
 - **缺失则终止 ff-big**，告知用户："ff-big 需要 pre_design.md。请先跑 /opsx:pre-design。"
 
 不需要检查其他 artifact——ff 阶段会自己处理（已存在的 artifact 会被跳过）。

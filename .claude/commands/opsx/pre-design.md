@@ -24,6 +24,8 @@ tags: [workflow, artifacts, planning, experimental]
 
 **Input**: `/opsx:pre-design` 后面可以跟需求主题、change 名称，或一段问题描述。
 
+**Store 与路径解析**：若用户指定了 store（store = 注册在本机的独立 OpenSpec 仓库）或工作发生在其中，先 `openspec store list --json` 获取 store id，创建 change 时用 `openspec new change <name> --store <id>`。下文的 `openspec/changes/<type>-<topic>/` 是无 store 时的本地默认；写 `pre_design.md` 的实际位置用 `openspec status --change <name> --json` 的 `changeRoot` 解析（`<changeRoot>/pre_design.md`），不要假设本地路径。未指定 store 时作用于最近的本地 `openspec/` 根。
+
 <HARD-GATE>
 在 `pre_design.md` 写完并经用户确认之前：
 - 不要生成 `proposal.md`、`design.md`、`tasks.md`、`specs/`
@@ -133,7 +135,7 @@ tags: [workflow, artifacts, planning, experimental]
 
 **创建或复用 change**：
 
-- 路径：`openspec/changes/<type>-<topic>/`
+- 路径：change 目录（无 store 时为 `openspec/changes/<type>-<topic>/`；用 `openspec status --change <name> --json` 的 `changeRoot` 解析实际位置）
 - `type ∈ {feature, fix, refactor, research, docs}`
 - `topic` 用 kebab-case，只表达主题，不塞实现细节
 - 通过 OpenSpec CLI 创建，确保 `.openspec.yaml` 存在

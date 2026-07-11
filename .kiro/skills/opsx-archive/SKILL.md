@@ -76,36 +76,13 @@ Archive a completed change in the experimental workflow.
    mv openspec/changes/<name> openspec/changes/archive/YYYY-MM-DD-<name>
    ```
 
-6. **Update implementation status**
-
-   Read `openspec/实现状态.md`.
-
-   Determine what capability the archived change implements:
-   - Read the change's proposal or design artifacts to identify the capability
-   - Match against existing rows in the status tables
-
-   **If a matching row is found:**
-   - Update: 状态 → "已实现", 归档 change → the archived change name, 更新日期 → today's date
-   - Update the "最后更新" line at the top of the document
-
-   **If the capability is new (no matching row):**
-   - Append a new row to the appropriate capability layer section (基础设施 / AI 能力 / 业务功能)
-   - Fill in all columns including 来源 (link to requirement card if one exists)
-
-   **If cannot determine the capability** (e.g., pure docs, renaming, or infrastructure-only changes):
-   - Do not modify the status table
-   - Note in the summary that no status update was made
-
-   **If `openspec/实现状态.md` does not exist:** Skip this step silently.
-
-7. **Display summary**
+6. **Display summary**
 
    Show archive completion summary including:
    - Change name
    - Schema that was used
    - Archive location
    - Spec sync status (synced / sync skipped / no delta specs)
-   - Implementation status update (which capability was updated, or "no matching capability")
    - Note about any warnings (incomplete artifacts/tasks)
 
 **Output On Success**
@@ -117,7 +94,6 @@ Archive a completed change in the experimental workflow.
 **Schema:** <schema-name>
 **Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
 **Specs:** ✓ Synced to main specs
-**Status:** ✓ Updated openspec/实现状态.md (<capability-name> → 已实现)
 
 All artifacts complete. All tasks complete.
 ```
@@ -131,7 +107,6 @@ All artifacts complete. All tasks complete.
 **Schema:** <schema-name>
 **Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
 **Specs:** No delta specs
-**Status:** ✓ Updated openspec/实现状态.md (<capability-name> → 已实现)
 
 All artifacts complete. All tasks complete.
 ```
@@ -145,7 +120,6 @@ All artifacts complete. All tasks complete.
 **Schema:** <schema-name>
 **Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
 **Specs:** Sync skipped (user chose to skip)
-**Status:** ✓ Updated openspec/实现状态.md (<capability-name> → 已实现)
 
 **Warnings:**
 - Archived with 2 incomplete artifacts

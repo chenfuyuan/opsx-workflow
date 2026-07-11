@@ -7,6 +7,10 @@ tags: [workflow, archive, experimental]
 
 Archive a completed change in the experimental workflow.
 
+**Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
+
+**Path resolution:** The `openspec/changes/…` and `openspec/specs/…` paths below are the repo-local default. When the change lives in a store, resolve real locations from `openspec status --change "<name>" --json` — `changeRoot` (the change dir to move) and `planningHome.changesDir` (whose `archive/` subdir is the archive target); main specs live under the same planning home. Operate on those resolved paths, not the hardcoded repo-local ones. (`openspec archive <name> [--store <id>]` is the CLI alternative if you don't need the custom date-stamped naming.)
+
 **语言**：所有面向用户的交流（提示、警告、汇总、下方所有 Output 模板）必须使用中文。保留命令、文件路径、change 名、schema 名、归档目录名等技术标识的原文，但解释性文字与标题用中文。
 
 **Input**: Optionally specify a change name after `/opsx:archive` (e.g., `/opsx:archive add-auth`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.

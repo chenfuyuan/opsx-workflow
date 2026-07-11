@@ -34,3 +34,5 @@ venv/
 # Claude/local artifacts
 .claude/.DS_Store
 .claude/commands/.DS_Store
+
+origin_opsx

@@ -7,6 +7,8 @@ tags: [workflow, artifacts, experimental]
 
 Start a new change using the experimental artifact-driven approach.
 
+**Store selection:** If the user names a store (a store is a standalone OpenSpec repo registered on this machine) or the work lives in one, run `openspec store list --json` to discover registered store ids, then pass `--store <id>` on the commands that read or write specs and changes (`new change`, `status`, `instructions`, `list`, `show`, `validate`, `archive`, `doctor`, `context`). Other commands do not take the flag. Hints printed by commands already carry the flag; keep it on follow-ups. Without a store, commands act on the nearest local `openspec/` root.
+
 **Input**: The argument after `/opsx:new` is the change name (kebab-case), OR a description of what the user wants to build.
 
 **Steps**
@@ -35,7 +37,7 @@ Start a new change using the experimental artifact-driven approach.
    openspec new change "<name>"
    ```
    Add `--schema <name>` only if the user requested a specific workflow.
-   This creates a scaffolded change at `openspec/changes/<name>/` with the selected schema.
+   This creates a scaffolded change in the resolved planning home — repo-local `openspec/changes/<name>/` by default, or the store's changes dir when `--store` is used. Do not assume the repo-local path; read `changeRoot` from the status JSON in the next step.
 
 4. **Show the artifact status**
    ```bash
